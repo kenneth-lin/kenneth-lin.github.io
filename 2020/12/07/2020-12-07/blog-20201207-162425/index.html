@@ -20,19 +20,24 @@
     var CONFIG = {"hostname":"kenneth-lin.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#682","save":"manual"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="一花一世界，一草一天堂，一叶一如来，一砂一极乐，一方一净土，一笑一尘缘。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="https://kenneth-lin.github.io/tags/index.html">
+  <meta name="description" content="This link is from: https:&#x2F;&#x2F;blog.csdn.net&#x2F;yano_nankai&#x2F;article&#x2F;details&#x2F;49022325分析&#x3D;&#x3D;   onPause()：Activity失去焦点，但仍然可见。  onStop()：Activity在后台，不可见（完全被另一个Activity挡住，或者程序后台运行）。  几种情况">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android onPause和onStop的比较">
+<meta property="og:url" content="https://kenneth-lin.github.io/2020/12/07/2020-12-07/blog-20201207-162425/index.html">
 <meta property="og:site_name" content="学无止境">
-<meta property="og:description" content="一花一世界，一草一天堂，一叶一如来，一砂一极乐，一方一净土，一笑一尘缘。">
+<meta property="og:description" content="This link is from: https:&#x2F;&#x2F;blog.csdn.net&#x2F;yano_nankai&#x2F;article&#x2F;details&#x2F;49022325分析&#x3D;&#x3D;   onPause()：Activity失去焦点，但仍然可见。  onStop()：Activity在后台，不可见（完全被另一个Activity挡住，或者程序后台运行）。  几种情况">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-11-27T18:00:38.000Z">
-<meta property="article:modified_time" content="2020-12-07T08:29:30.383Z">
+<meta property="og:image" content="https://img-blog.csdn.net/20151010121353789">
+<meta property="og:image" content="https://img-blog.csdn.net/20151010121603079">
+<meta property="og:image" content="https://img-blog.csdn.net/20151010122736424">
+<meta property="article:published_time" content="2020-12-07T16:24:28.000Z">
+<meta property="article:modified_time" content="2020-12-07T08:29:30.375Z">
 <meta property="article:author" content="Kenneth">
+<meta property="article:tag" content="AndroidActivity">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20151010121353789">
 
-<link rel="canonical" href="https://kenneth-lin.github.io/tags/">
+<link rel="canonical" href="https://kenneth-lin.github.io/2020/12/07/2020-12-07/blog-20201207-162425/">
 
 
 <script id="page-configurations">
@@ -40,13 +45,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>tags | 学无止境
-</title>
+  <title>Android onPause和onStop的比较 | 学无止境</title>
   
 
 
@@ -183,51 +187,202 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content post posts-expand">
             
 
     
-    
-    
-    <div class="post-block" lang="zh-CN">
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kenneth-lin.github.io/2020/12/07/2020-12-07/blog-20201207-162425/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/i.jpg">
+      <meta itemprop="name" content="Kenneth">
+      <meta itemprop="description" content="一花一世界，一草一天堂，一叶一如来，一砂一极乐，一方一净土，一笑一尘缘。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="学无止境">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Android onPause和onStop的比较
+        </h1>
 
-<h1 class="post-title" itemprop="name headline">tags
-</h1>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
 
-<div class="post-meta">
+              <time title="创建时间：2020-12-07 16:24:28 / 修改时间：08:29:30" itemprop="dateCreated datePublished" datetime="2020-12-07T16:24:28+00:00">2020-12-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yano_nankai/article/details/49022325">This link is from: https://blog.csdn.net/yano_nankai/article/details/49022325</a><br>分析<br>==</p>
+<ol>
+<li> onPause()：Activity失去焦点，但仍然可见。</li>
+<li> onStop()：Activity在后台，不可见（完全被另一个Activity挡住，或者程序后台运行）。</li>
+</ol>
+<p>几种情况</p>
+<a id="more"></a>
+<p>====</p>
+<ol>
+<li> 锁屏的时候，会依次调用onPause()和onStop()。</li>
+<li> Toast、Dialog、Menu，三者都不会使Activity调用onPause()。</li>
+<li> 一个非全屏的Activity在前面时，后面的Activity只调用onPause()。</li>
+</ol>
+<h2 id="Dialog"><a href="#Dialog" class="headerlink" title="Dialog"></a>Dialog</h2><p>不会调用onPause()和onStop()  </p>
+<p><img src="https://img-blog.csdn.net/20151010121353789"></p>
+<h2 id="非全屏Activity"><a href="#非全屏Activity" class="headerlink" title="非全屏Activity"></a>非全屏Activity</h2><p>会调用onPause()，不会调用onStop()</p>
+<p><img src="https://img-blog.csdn.net/20151010121603079"></p>
+<h2 id="全屏Activity"><a href="#全屏Activity" class="headerlink" title="全屏Activity"></a>全屏Activity</h2><p>会调用onPause()和onStop()  </p>
+<p><img src="https://img-blog.csdn.net/20151010122736424"></p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="MainActivity"><a href="#MainActivity" class="headerlink" title="MainActivity"></a>MainActivity</h2><pre><code>import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends Activity &#123;
+
+    private TextView textView;
+    private Button button1;
+    private Button button2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) &#123;
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        textView = (TextView) findViewById(R.id.textView);
+        button1 = (Button) findViewById(R.id.button1);
+        button2 = (Button) findViewById(R.id.button2);
+
+        button1.setOnClickListener(new View.OnClickListener() &#123;
+
+            public void onClick(View v) &#123;
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        &quot;默认的Toast&quot;, Toast.LENGTH_SHORT);
+                toast.show();
+            &#125;
+        &#125;);
+
+        button1.setOnLongClickListener(new View.OnLongClickListener() &#123;
+
+            public boolean onLongClick(View v) &#123;
+
+                AlertDialog.Builder builder = new Builder(MainActivity.this);
+
+                builder.setMessage(&quot;测试onPause&quot;);
+                builder.setPositiveButton(&quot;确认&quot;, new OnClickListener() &#123;
+                    public void onClick(DialogInterface dialog, int which) &#123;
+                        dialog.dismiss();
+                    &#125;
+                &#125;);
+
+                builder.create().show();
+                return true;
+            &#125;
+        &#125;);
+
+        button2.setOnClickListener(new View.OnClickListener() &#123;
+
+            public void onClick(View v) &#123;
+                startActivity(new Intent(MainActivity.this,
+                        SecondActivity.class));
+            &#125;
+        &#125;);
+    &#125;
+
+    @Override
+    protected void onPause() &#123;
+        System.out.println(&quot;onPause---&quot;);
+        super.onPause();
+    &#125;
+
+    @Override
+    protected void onStop() &#123;
+        System.out.println(&quot;onStop---&quot;);
+        super.onStop();
+    &#125;
+
+    // 创建菜单选项
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) &#123;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.option_menu, menu);
+        return true;
+    &#125;
+&#125;</code></pre>
+<hr>
+<h2 id="SecondActivity"><a href="#SecondActivity" class="headerlink" title="SecondActivity"></a>SecondActivity</h2><pre><code>import android.app.Activity;
+import android.os.Bundle;
+
+public class SecondActivity extends Activity &#123;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) &#123;
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.second_xml);
+    &#125;
+
+&#125;</code></pre>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AndroidActivity/" rel="tag"># AndroidActivity</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/07/2020-12-07/blog-20201207-162014/" rel="prev" title="Android Studio Profiler Memory（内存分析工具）的简单使用及问题分析">
+      <i class="fa fa-chevron-left"></i> Android Studio Profiler Memory（内存分析工具）的简单使用及问题分析
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/07/2020-12-07/blog-20201207-162516/" rel="next" title="Android Activity生命周期详解">
+      Android Activity生命周期详解 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-              目前共计 4 个标签
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/AndroidActivity/" style="font-size: 30px; color: #111">AndroidActivity</a> <a href="/tags/AndroidMemory/" style="font-size: 12px; color: #ccc">AndroidMemory</a> <a href="/tags/AndroidProfiler/" style="font-size: 12px; color: #ccc">AndroidProfiler</a> <a href="/tags/Hexo/" style="font-size: 12px; color: #ccc">Hexo</a>
-            </div>
-          </div>
-        
-      </div>
-      
-      
-      
-    </div>
-    
-
-    
-    
-    
 
 
           </div>
@@ -278,6 +433,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dialog"><span class="nav-number">1.</span> <span class="nav-text">Dialog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E5%85%A8%E5%B1%8FActivity"><span class="nav-number">2.</span> <span class="nav-text">非全屏Activity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%8FActivity"><span class="nav-number">3.</span> <span class="nav-text">全屏Activity</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number"></span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MainActivity"><span class="nav-number">1.</span> <span class="nav-text">MainActivity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SecondActivity"><span class="nav-number">2.</span> <span class="nav-text">SecondActivity</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

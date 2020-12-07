@@ -20,19 +20,25 @@
     var CONFIG = {"hostname":"kenneth-lin.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#682","save":"manual"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="一花一世界，一草一天堂，一叶一如来，一砂一极乐，一方一净土，一笑一尘缘。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="https://kenneth-lin.github.io/tags/index.html">
+  <meta name="description" content="This link is from: https:&#x2F;&#x2F;blog.csdn.net&#x2F;yuxiatongzhi&#x2F;article&#x2F;details&#x2F;820232511. app内存限制&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;   Android给每个App分配一个VM，让App运行在dalvik上，这样即使App崩溃也不会影响到系统。系统给VM分配了一定的内存大小，App可以申请使用的内存大小不能超过此硬性逻辑限制，就算物">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android app内存使用限制">
+<meta property="og:url" content="https://kenneth-lin.github.io/2020/12/07/2020-12-07/blog-20201207-162536/index.html">
 <meta property="og:site_name" content="学无止境">
-<meta property="og:description" content="一花一世界，一草一天堂，一叶一如来，一砂一极乐，一方一净土，一笑一尘缘。">
+<meta property="og:description" content="This link is from: https:&#x2F;&#x2F;blog.csdn.net&#x2F;yuxiatongzhi&#x2F;article&#x2F;details&#x2F;820232511. app内存限制&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;   Android给每个App分配一个VM，让App运行在dalvik上，这样即使App崩溃也不会影响到系统。系统给VM分配了一定的内存大小，App可以申请使用的内存大小不能超过此硬性逻辑限制，就算物">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-11-27T18:00:38.000Z">
-<meta property="article:modified_time" content="2020-12-07T08:29:30.383Z">
+<meta property="og:image" content="https://img-blog.csdn.net/20180824174834136?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1eGlhdG9uZ3poaQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yNjU2NzY0LTBjN2VlZmMwYWMyZmZkNjkucG5n?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yNjU2NzY0LTk0MTNiMzk2NjdlYTgyYTkucG5n?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yNjU2NzY0LWM3NjE5ODcxNjQ4M2UyYjMucG5n?x-oss-process=image/format,png">
+<meta property="article:published_time" content="2020-12-07T16:25:39.000Z">
+<meta property="article:modified_time" content="2020-12-07T08:29:30.375Z">
 <meta property="article:author" content="Kenneth">
+<meta property="article:tag" content="AndroidMemory">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180824174834136?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1eGlhdG9uZ3poaQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
 
-<link rel="canonical" href="https://kenneth-lin.github.io/tags/">
+<link rel="canonical" href="https://kenneth-lin.github.io/2020/12/07/2020-12-07/blog-20201207-162536/">
 
 
 <script id="page-configurations">
@@ -40,13 +46,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>tags | 学无止境
-</title>
+  <title>android app内存使用限制 | 学无止境</title>
   
 
 
@@ -183,51 +188,91 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content post posts-expand">
             
 
     
-    
-    
-    <div class="post-block" lang="zh-CN">
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kenneth-lin.github.io/2020/12/07/2020-12-07/blog-20201207-162536/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/i.jpg">
+      <meta itemprop="name" content="Kenneth">
+      <meta itemprop="description" content="一花一世界，一草一天堂，一叶一如来，一砂一极乐，一方一净土，一笑一尘缘。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="学无止境">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          android app内存使用限制
+        </h1>
 
-<h1 class="post-title" itemprop="name headline">tags
-</h1>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
 
-<div class="post-meta">
+              <time title="创建时间：2020-12-07 16:25:39 / 修改时间：08:29:30" itemprop="dateCreated datePublished" datetime="2020-12-07T16:25:39+00:00">2020-12-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yuxiatongzhi/article/details/82023251">This link is from: https://blog.csdn.net/yuxiatongzhi/article/details/82023251</a><br>1. app内存限制<br>===========</p>
+<p>  <code>Android</code>给每个<code>App</code>分配一个<code>VM</code>，让App运行在<code>dalvik</code>上，这样即使<code>App</code>崩溃也不会影响到系统。系统给<code>VM</code>分配了一定的内存大小，<code>App</code>可以申请使用的内存大小不能超过此硬性逻辑限制，就算物理内存富余，如果应用超出<code>VM</code>最大内存，就会出现内存溢出<code>crash</code>。<br>  由程序控制操作的内存空间在<code>heap</code>上，分<code>java heapsize</code>和<code>native heapsize</code>，Java申请的内存在<code>vm heap</code>上，所以如果<code>java</code>申请的内存大小超过<code>VM</code>的逻辑内存限制,就会出现内存溢出的异常。<strong>native层内存申请不受其限制</strong>,<code>native</code>层受<code>native process</code>对内存大小的限制。<br><img src="https://img-blog.csdn.net/20180824174834136?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1eGlhdG9uZ3poaQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="heapsize"></p>
+<a id="more"></a>
+<h1 id="2-查看Android设备上的对APP的内存限制"><a href="#2-查看Android设备上的对APP的内存限制" class="headerlink" title="2. 查看Android设备上的对APP的内存限制"></a>2. 查看Android设备上的对APP的内存限制</h1><p>主要查看系统配置文件 <code>build.prop</code>，我们可以通过<code>adb shell</code>在 命令行窗口查看</p>
+<ol>
+<li>查看设备app内存限制<br> <code>adb shell getprop | findstr dalvik.vm.heapgrowthlimit</code><br> <img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yNjU2NzY0LTBjN2VlZmMwYWMyZmZkNjkucG5n?x-oss-process=image/format,png" alt="heapgrowthlimit"></li>
+<li>Android app可以在<code>AndroidManifast.xml</code>里的<code>&lt;application android:largeHeap=&quot;true&quot;/&gt;</code>标签里加入<code>largeHeap</code>开启内存加强，开启内存加强后，可使用内存会变大，这也是一个固定值，可以查看<br> <code>adb shell getprop | findstr dalvik.vm.heapsize</code><br> <img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yNjU2NzY0LTk0MTNiMzk2NjdlYTgyYTkucG5n?x-oss-process=image/format,png" alt="heapsize"></li>
+<li>可以查看更详细的<br> <code>adb shell cat /system/build.prop | findstr dalvik.vm</code><br> <img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8yNjU2NzY0LWM3NjE5ODcxNjQ4M2UyYjMucG5n?x-oss-process=image/format,png" alt="build.prop"></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AndroidMemory/" rel="tag"># AndroidMemory</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/07/2020-12-07/blog-20201207-162516/" rel="prev" title="Android Activity生命周期详解">
+      <i class="fa fa-chevron-left"></i> Android Activity生命周期详解
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-              目前共计 4 个标签
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/AndroidActivity/" style="font-size: 30px; color: #111">AndroidActivity</a> <a href="/tags/AndroidMemory/" style="font-size: 12px; color: #ccc">AndroidMemory</a> <a href="/tags/AndroidProfiler/" style="font-size: 12px; color: #ccc">AndroidProfiler</a> <a href="/tags/Hexo/" style="font-size: 12px; color: #ccc">Hexo</a>
-            </div>
-          </div>
-        
-      </div>
-      
-      
-      
-    </div>
-    
-
-    
-    
-    
 
 
           </div>
@@ -278,6 +323,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%9F%A5%E7%9C%8BAndroid%E8%AE%BE%E5%A4%87%E4%B8%8A%E7%9A%84%E5%AF%B9APP%E7%9A%84%E5%86%85%E5%AD%98%E9%99%90%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">2. 查看Android设备上的对APP的内存限制</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

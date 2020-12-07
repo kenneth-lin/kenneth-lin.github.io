@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"kenneth-lin.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#682","save":"manual"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="This link is from: https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;60efad38c5d6Memory Profiler 是 Android Studio自带的内存分析工具，可以帮助开发者很好的检测内存的使用，在出现问题时，也能比较方便的分析定位问题，不过在使用的时候，好像并非像自己一开始设想的样子。 如何查看整体的内存使用概况如果想要看一个APP整体内存的使用，看APP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Studio Profiler Memory（内存分析工具）的简单使用及问题分析">
+<meta property="og:url" content="https://kenneth-lin.github.io/2020/12/07/2020-12-07/blog-20201207-162014/index.html">
+<meta property="og:site_name" content="学无止境">
+<meta property="og:description" content="This link is from: https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;60efad38c5d6Memory Profiler 是 Android Studio自带的内存分析工具，可以帮助开发者很好的检测内存的使用，在出现问题时，也能比较方便的分析定位问题，不过在使用的时候，好像并非像自己一开始设想的样子。 如何查看整体的内存使用概况如果想要看一个APP整体内存的使用，看APP">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-12-07T16:20:16.000Z">
+<meta property="article:modified_time" content="2020-12-07T08:29:30.375Z">
+<meta property="article:author" content="Kenneth">
+<meta property="article:tag" content="AndroidProfiler">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://kenneth-lin.github.io/2020/12/07/2020-12-07/blog-20201207-162014/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Android Studio Profiler Memory（内存分析工具）的简单使用及问题分析 | 学无止境</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">学无止境</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">吾生也有涯，而知也无涯</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">5</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://kenneth-lin.github.io/2020/12/07/2020-12-07/blog-20201207-162014/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/i.jpg">
+      <meta itemprop="name" content="Kenneth">
+      <meta itemprop="description" content="一花一世界，一草一天堂，一叶一如来，一砂一极乐，一方一净土，一笑一尘缘。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="学无止境">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Android Studio Profiler Memory（内存分析工具）的简单使用及问题分析
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-12-07 16:20:16 / 修改时间：08:29:30" itemprop="dateCreated datePublished" datetime="2020-12-07T16:20:16+00:00">2020-12-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/60efad38c5d6">This link is from: https://www.jianshu.com/p/60efad38c5d6</a><br>Memory Profiler 是 Android Studio自带的内存分析工具，可以帮助开发者很好的检测内存的使用，在出现问题时，也能比较方便的分析定位问题，不过在使用的时候，好像并非像自己一开始设想的样子。</p>
+<h2 id="如何查看整体的内存使用概况"><a href="#如何查看整体的内存使用概况" class="headerlink" title="如何查看整体的内存使用概况"></a>如何查看整体的内存使用概况</h2><p>如果想要看一个APP整体内存的使用，看APP heap就可以了，不过需要注意Shallow Size跟Retained Size是意义，另外native消耗的内存是不会被算到Java堆中去的。</p>
+<a id="more"></a>
+<p>image.png</p>
+<ul>
+<li>  Allocations：堆中的实例数。</li>
+<li>  Shallow Size：此堆中所有实例的总大小（以字节为单位）。<strong>其实算是比较真实的java堆内存</strong></li>
+<li>  Retained Size：为此类的所有实例而保留的内存总大小（以字节为单位）。<strong>这个解释并不准确，因为Retained Size会有大量的重复统计</strong></li>
+<li>  native size：8.0之后的手机会显示，主要反应Bitmap所使用的像素内存（8.0之后，转移到了native）</li>
+</ul>
+<p>举个例子，创建一个List的场景，有一个ListItem40MClass类，自身占用40M内存，每个对象有个指向下一个ListItem40MClass对象的引用，从而构成List，</p>
+<pre><code>class ListItem40MClass &#123;
+
+    byte[] content = new byte[1000 * 1000 * 40];
+    ListItem40MClass() &#123;
+        for (int i = 0; i &lt; content.length; i++) &#123;
+            content[i] = 1;
+        &#125;
+    &#125;
+
+    @Override
+    protected void finalize() throws Throwable &#123;
+        super.finalize();
+    &#125;
+
+    ListItem40MClass next;
+&#125;
+
+
+@OnClick(R.id.first)
+void first() &#123;
+    if (head == null) &#123;
+        head = new ListItem40MClass();
+    &#125; else &#123;
+        ListItem40MClass tmp = head;
+        while (tmp.next != null) &#123;
+            tmp = tmp.next;
+        &#125;
+        tmp.next = new ListItem40MClass();
+    &#125;
+&#125;</code></pre>
+<p>我们创建三个这样的对象，并形成List，示意如下</p>
+<pre><code>A1-&gt;next=A2
+A2-&gt;next=A3 
+A3-&gt;next= null</code></pre>
+<p>这个时候用Android Profiler查看内存，会看到如下效果：Retained Size统计要比实际3个ListItem40MClass类对象的大小大的多，如下图：</p>
+<p>281540022720_.pic_hd.jpg</p>
+<p>可以看到就总量而言Shallow Size基本能真是反应Java堆内存，而Retained Size却明显要高出不少， 因为Retained Size统计总内存的时候，基本不能避免重复统计的问题，比如：A对象有B对象的引用在计算总的对象大小的时候，一般会多出一个B，就像上图，有个3个约40M的int[]对象，占内存约120M,而每个ListItem40MClass对象至少会再统计一次40M，这里说的是至少，因为对象间可能还有其他关系。我们看下单个类的内存占用-Instance View</p>
+<ul>
+<li>  Depth：从任意 GC 根到所选实例的最短 hop 数。</li>
+<li>  Shallow Size：此实例的大小。</li>
+<li>  Retained Size：此实例支配的内存大小（根据 dominator 树）。</li>
+</ul>
+<p>可以看到Head本身的Retained Size是120M ，Head-&gt;next 是80M，最后一个ListItem40MClass对象是40M，因为每个对象的Retained Size除了包括自己的大小，还包括引用对象的大小，整个类的Retained Size大小累加起来就大了很多，所以如果想要看整体内存占用，看Shallow Size还是相对准确的，Retained Size可以用来大概反应哪种类占的内存比较多，仅仅是个示意，不过还是Retained Size比较常用，因为Shallow Size的大户一般都是String，数组，基本类型意义不大，如下。</p>
+<p>291540025853_.pic.jpg</p>
+<h2 id="FinalizerReference大小跟内存使用及内存泄漏的关系"><a href="#FinalizerReference大小跟内存使用及内存泄漏的关系" class="headerlink" title="FinalizerReference大小跟内存使用及内存泄漏的关系"></a>FinalizerReference大小跟内存使用及内存泄漏的关系</h2><p>之前说Retained Size是此实例支配的内存大小，其实在Retained Size的统计上有很多限制，比如Depth：从任意 GC 根到所选实例的最短hop数，一个对象的Retained Size只会统计Depth比自己大的引用，而不会统计小的，这个可能是为了避免重复统计而引入的，但是其实Retained Size在整体上是免不了重复统计的问题，所以才会右下图的情况：</p>
+<p>image.png</p>
+<p>FinalizerReference中refrent的对象的retain size是40M，但是没有被计算到FinalizerReference的retain size中去，而且就图表而言FinalizerReference的意义其实不大，FinalizerReference对象本身占用的内存不大，其次FinalizerReference的retain size统计的可以说是FinalizerReference的重复累加的和，并不代表其引用对象的大小，仅仅是ReferenceQueue<Object> queue中ReferenceQueue的累加，</p>
+<pre><code>public final class FinalizerReference&lt;T&gt; extends Reference&lt;T&gt; &#123;
+    // This queue contains those objects eligible for finalization.
+    public static final ReferenceQueue&lt;Object&gt; queue = new ReferenceQueue&lt;Object&gt;();
+
+    // Guards the list (not the queue).
+    private static final Object LIST_LOCK = new Object();
+
+    // This list contains a FinalizerReference for every finalizable object in the heap.
+    // Objects in this list may or may not be eligible for finalization yet.
+    private static FinalizerReference&lt;?&gt; head = null;
+
+    // The links used to construct the list.
+    private FinalizerReference&lt;?&gt; prev;
+    private FinalizerReference&lt;?&gt; next;
+
+    // When the GC wants something finalized, it moves it from the &#39;referent&#39; field to
+    // the &#39;zombie&#39; field instead.
+    private T zombie;
+
+    public FinalizerReference(T r, ReferenceQueue&lt;? super T&gt; q) &#123;
+        super(r, q);
+    &#125;
+
+    @Override public T get() &#123;
+        return zombie;
+    &#125;
+
+    @Override public void clear() &#123;
+        zombie = null;
+    &#125;
+
+    public static void add(Object referent) &#123;
+        FinalizerReference&lt;?&gt; reference = new FinalizerReference&lt;Object&gt;(referent, queue);
+        synchronized (LIST_LOCK) &#123;
+            reference.prev = null;
+            reference.next = head;
+            if (head != null) &#123;
+                head.prev = reference;
+            &#125;
+            head = reference;
+        &#125;
+    &#125;
+
+    public static void remove(FinalizerReference&lt;?&gt; reference) &#123;
+        synchronized (LIST_LOCK) &#123;
+            FinalizerReference&lt;?&gt; next = reference.next;
+            FinalizerReference&lt;?&gt; prev = reference.prev;
+            reference.next = null;
+            reference.prev = null;
+            if (prev != null) &#123;
+                prev.next = next;
+            &#125; else &#123;
+                head = next;
+            &#125;
+            if (next != null) &#123;
+                next.prev = prev;
+            &#125;
+        &#125;
+    &#125;
+...
+&#125;</code></pre>
+<p>每个FinalizerReference retained size 都是其next+ FinalizerReference的shallowsize，反应的并不是其refrent对象内存的大小，如下：</p>
+<p>image.png</p>
+<p>因此FinalizerReference越大只能说明需要执行finalize的对象越多，并且对象是通过强引用被持有，等待Deamon线程回收。可以通过该下代码试验下：</p>
+<pre><code> class ListItem40MClass &#123;
+        byte[] content = new byte[5];
+
+        ListItem40MClass() &#123;
+            for (int i = 0; i &lt; content.length; i += 1000) &#123;
+                content[i] = 1;
+            &#125;
+        &#125;
+
+        @Override
+        protected void finalize() throws Throwable &#123;
+            super.finalize();
+            LogUtils.v(&quot;finalize ListItem40MClass&quot;);
+        &#125;
+
+        ListItem40MClass next;
+    &#125;
+
+
+    @OnClick(R.id.first)
+    void first() &#123;
+        if (head == null) &#123;
+            head = new ListItem40MClass();
+        &#125; else &#123;
+            for (int i = 0; i &lt; 1000; i++) &#123;
+                ListItem40MClass tmp = head;
+                while (tmp.next != null) &#123;
+                    tmp = tmp.next;
+                &#125;
+                tmp.next = new ListItem40MClass();
+            &#125;
+        &#125;
+    &#125;</code></pre>
+<p>多次点击后，可以看到finalize的对象线性上升，而FinalizerReference的retain size却会指数上升。</p>
+<p>image.png</p>
+<p>同之前40M的对比下，明显上一个内存占用更多，但是其实FinalizerReference的retain size却更小。再来理解FinalizerReference跟内存泄漏的关系就比价好理解了，回收线程没执行，实现了finalize方法的对象一直没有被释放，或者很迟才被释放，这个时候其实就算是泄漏了。</p>
+<h2 id="如何看Profiler的Memory图"><a href="#如何看Profiler的Memory图" class="headerlink" title="如何看Profiler的Memory图"></a>如何看Profiler的Memory图</h2><ul>
+<li>  第一：看整体Java内存使用看shallowsize就可以了</li>
+<li>  第二：想要看哪些对象占用内存较多，可以看Retained Size，不过看Retained Size的时候，要注意过滤一些无用的比如 FinalizerReference，基本类型如：数组对象</li>
+</ul>
+<p>比如下图：Android 6.0 nexus5</p>
+<p>image.png</p>
+<p>从整体概况上看，Java堆内存的消耗是91兆左右，而整体的shallow size大概80M，其余应该是一些堆栈基础类型的消耗，而在Java堆栈中，占比最大的是byte[]，其次是Bitmap，bitmap中的byte[]也被算进了前面的byte[] retain size中，而FinilizerReference的retain size已经大的不像话，没什么参考价值，可以看到Bitmap本身其实占用内存很少，主要是里面的byte[]，当然这个是Android8.0之前的bitmap，8.0之后，bitmap的内存分配被转移到了native。</p>
+<p>再来对比下Android8.0的nexus6p：可以看到占大头的Bitmap的内存转移到native中去了，降低了OOM风险。</p>
+<p>image.png</p>
+<p>并且在Android 8.0或更高版本中，可以更清楚的查看对象及内存的动态分配，而且不用dump内存，直接选中某一段，就可以看这个时间段的内存分配：如下</p>
+<p>image.png</p>
+<p>如上图，在时间点1 ，我们创建了一个对象new ListItem40MClass()，ListItem40MClass有一个比较占内存的byte数组，上面折线升高处有新对象创建，然后会发现内存大户是byte数组，而最新的byte数组是在ListItem40MClass对象创建的时候分配的，这样就能比较方便的看到，到底是哪些对象导致的内存上升。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>  总体Java内存使用看shallow size</li>
+<li>  retained size只是个参考，不准确，存在各种重复统计问题</li>
+<li>  FinalizerReference retained size 大小极其不准确，而且其强引用的对象并没有被算进去，不过finilize确实可能导致内存泄漏</li>
+<li>  native size再8.0之后，对Bitmap的观测有帮助。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/AndroidProfiler/" rel="tag"># AndroidProfiler</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/03/2020-12-03/blog-20201203-170835/" rel="prev" title="Hexo的Next主题详细配置">
+      <i class="fa fa-chevron-left"></i> Hexo的Next主题详细配置
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/12/07/2020-12-07/blog-20201207-162425/" rel="next" title="Android onPause和onStop的比较">
+      Android onPause和onStop的比较 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E6%95%B4%E4%BD%93%E7%9A%84%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8%E6%A6%82%E5%86%B5"><span class="nav-number">1.</span> <span class="nav-text">如何查看整体的内存使用概况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FinalizerReference%E5%A4%A7%E5%B0%8F%E8%B7%9F%E5%86%85%E5%AD%98%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">2.</span> <span class="nav-text">FinalizerReference大小跟内存使用及内存泄漏的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%9C%8BProfiler%E7%9A%84Memory%E5%9B%BE"><span class="nav-number">3.</span> <span class="nav-text">如何看Profiler的Memory图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Kenneth"
+      src="/images/i.jpg">
+  <p class="site-author-name" itemprop="name">Kenneth</p>
+  <div class="site-description" itemprop="description">一花一世界，一草一天堂，一叶一如来，一砂一极乐，一方一净土，一笑一尘缘。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kenneth-lin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kenneth-lin" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tutmirleid@163.com" title="E-Mail → mailto:tutmirleid@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kenneth</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
