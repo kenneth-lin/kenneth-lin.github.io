@@ -665,4 +665,125 @@ V/MAIN_ACTIVITY2: onRestoreInstanceState ---&gt; 恢复数据时调用 --&gt; te
         <tag>AndroidMemory</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Launch App via adb without knowing Activity name [duplicate]</title>
+    <url>/2020/12/08/2020-12-08/blog-20201208-101909/</url>
+    <content><![CDATA[<p><a href="https://stackoverflow.com/questions/29931318/launch-app-via-adb-without-knowing-activity-name">This link is from: https://stackoverflow.com/questions/29931318/launch-app-via-adb-without-knowing-activity-name</a><br>47</p>
+<p>21</p>
+<p><a href="/posts/29931318/timeline" title="Show activity on this post."></a></p>
+<p><strong>This question already has answers here</strong>:</p>
+<a id="more"></a>
+
+<p><a href="/questions/4567904/how-to-start-an-application-using-android-adb-tools">How to start an application using android ADB tools?</a> (11 answers)</p>
+<p>Closed 3 years ago.</p>
+<p>From the post <a href="https://stackoverflow.com/questions/13380590/is-it-possible-to-start-activity-through-adb-shell">Is it possible to start activity through adb shell?</a>, we can start an Android app via adb by</p>
+<pre><code>adb shell am start -n yourpackagename/.activityname</code></pre>
+<p>But is it possible to start an Android app via adb without knowing the Activity name? For example, by sending the <strong>android.intent.action.MAIN</strong> intent to a package? Maybe some command like this:</p>
+<pre><code>adb shell am start -a android.intent.action.MAIN -n packageName</code></pre>
+<p>Thanks!!</p>
+<p>-Cosmo</p>
+<p><a href="/questions/tagged/android" title="show questions tagged &#39;android&#39;">android</a> <a href="/questions/tagged/android-intent" title="show questions tagged &#39;android-intent&#39;">android-intent</a> <a href="/questions/tagged/adb" title="show questions tagged &#39;adb&#39;">adb</a></p>
+<p><a href="/q/29931318" title="short permalink to this question">share</a> | <a href="/posts/29931318/edit">improve this question</a> | follow |</p>
+<p><a href="/posts/29931318/revisions" title="show all edits to this post">edited Aug 28 ‘18 at 22:06</a></p>
+<p>[</p>
+<p><img src="https://i.stack.imgur.com/HIUgI.png?s=32&g=1"></p>
+<p>](/users/1778421/alex-p)</p>
+<p><a href="/users/1778421/alex-p">Alex P.</a></p>
+<p>25.9k1616 gold badges9898 silver badges150150 bronze badges</p>
+<p>asked Apr 28 ‘15 at 22:49</p>
+<p>[</p>
+<p><img src="https://i.stack.imgur.com/0aQ16.jpg?s=32&g=1"></p>
+<p>](/users/3697757/hackjutsu)</p>
+<p><a href="/users/3697757/hackjutsu">hackjutsu</a>hackjutsu</p>
+<p>6,32099 gold badges3838 silver badges7272 bronze badges</p>
+<ul>
+<li><p>2</p>
+<p>  <a href="http://stackoverflow.com/questions/4567904/how-to-start-an-application-using-android-adb-tools/25398877#25398877" title="how to start an application using android adb tools">stackoverflow.com/questions/4567904/…</a> – <a href="/users/4409409/daniel-nugent" title="39,962 reputation">Daniel Nugent</a> Apr 28 ‘15 at 23:13</p>
+</li>
+<li><p>  rule of thumb - when your accepted answer is nothing but a reference to another post - your question is a duplicate – <a href="/users/1778421/alex-p" title="25,891 reputation">Alex P.</a> Aug 28 ‘18 at 22:07</p>
+</li>
+<li><p>2</p>
+<p>  @AlexP. But this question is not quite the same—— At least, Google “adb start app” result in lots of <code>adb shell am start -n packagename/.activityname</code> things; while Google “adb start app <strong>without knowing Activity name</strong>“ won’t filter out the duplicated SO question. So this question could be reasonably valuable. – <a href="/users/1819810/weekend" title="1,341 reputation">Weekend</a> Aug 29 ‘18 at 2:38</p>
+</li>
+<li><p>3</p>
+<p>  The duplicated question accidentally has an answer which solves this question. But it’s not the duplicated question specifically asked for. This question is asking for a more particular situation. – <a href="/users/1819810/weekend" title="1,341 reputation">Weekend</a> Aug 29 ‘18 at 2:50</p>
+</li>
+</ul>
+<p><a href="#" title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments.">add a comment</a> | <a href="#" title="expand to show all comments on this post"></a></p>
+<h2 id="3-Answers-3"><a href="#3-Answers-3" class="headerlink" title="3 Answers 3"></a>3 Answers 3</h2><p><a href="/questions/29931318/launch-app-via-adb-without-knowing-activity-name?answertab=active#tab-top" title="Answers with the latest activity first">Active</a> <a href="/questions/29931318/launch-app-via-adb-without-knowing-activity-name?answertab=oldest#tab-top" title="Answers in the order they were provided">Oldest</a> <a href="/questions/29931318/launch-app-via-adb-without-knowing-activity-name?answertab=votes#tab-top" title="Answers with the highest score first">Votes</a></p>
+<p>88</p>
+<p><a href="/posts/29931521/timeline" title="Show activity on this post."></a></p>
+<p>Yes, it is possible to launch an app via adb shell making use of the monkey tool.</p>
+<p>Using the command from <a href="https://stackoverflow.com/questions/4567904/how-to-start-an-application-using-android-adb-tools/25398877#25398877">this answer</a>:</p>
+<pre><code>adb shell monkey -p app.package.name -c android.intent.category.LAUNCHER 1</code></pre>
+<p>This command simulates the app icon click, so the intent implicit intent LAUNCHER is delivered to the specific receiver declared in app manifest (MAIN)</p>
+<p><a href="/a/29931521" title="short permalink to this answer">share</a> | <a href="/posts/29931521/edit">improve this answer</a> | follow |</p>
+<p><a href="/posts/29931521/revisions" title="show all edits to this post">edited May 23 ‘17 at 12:18</a></p>
+<p>[</p>
+<p><img src="https://www.gravatar.com/avatar/a007be5a61f6aa8f3e85ae2fc18dd66e?s=32&d=identicon&r=PG"></p>
+<p>](/users/-1/community)</p>
+<p><a href="/users/-1/community">Community</a>♦</p>
+<p>111 silver badge</p>
+<p>answered Apr 28 ‘15 at 23:10</p>
+<p>[</p>
+<p><img src="https://www.gravatar.com/avatar/48cc9682294063a9a14fb9da45ec778b?s=32&d=identicon&r=PG"></p>
+<p>](/users/1648969/leuofiridia)</p>
+<p><a href="/users/1648969/leuofiridia">Leuofiridia</a>Leuofiridia</p>
+<p>1,03188 silver badges55 bronze badges</p>
+<ul>
+<li><p>  It worked. But how to detect Main Activity name? I want to send parameter to a activity (main activity in com.sec.android.gallery3d package), So I should know main activity name. – <a href="/users/421467/dr-jacky" title="2,306 reputation">Dr.jacky</a> Dec 15 ‘15 at 8:17</p>
+</li>
+<li><p>  Is it also possible, given the APK file, to run this ? Suppose I have an APK file, and I want to be able to install&amp;run it, is it possible? – <a href="/users/878126/android-developer" title="105,349 reputation">android developer</a> Jun 15 ‘16 at 7:41</p>
+</li>
+<li><p>1</p>
+<p>  I get an error: <strong>No activities found to run, monkey aborted</strong> – <a href="/users/6998684/igorganapolsky" title="22,109 reputation">IgorGanapolsky</a> Aug 4 ‘16 at 21:14</p>
+</li>
+<li><p>2</p>
+<p>  @IgorGanapolsky, are you sure the package name is correct? If you’re the developer of the application, make sure you have at least one activity with the intent filter with action <code>android.intent.action.MAIN</code> and category <code>android.intent.category.LAUNCHER</code> – <a href="/users/1648969/leuofiridia" title="1,031 reputation">Leuofiridia</a> Aug 9 ‘16 at 21:06</p>
+</li>
+<li><p>  @androiddeveloper yes, it’s possible. Android Studio itself use the adb to install and run the app when you click to run the file. Take a look at <a href="https://developer.android.com/studio/command-line/adb.html#move">the official adb documentation</a> for further details – <a href="/users/1648969/leuofiridia" title="1,031 reputation">Leuofiridia</a> Aug 9 ‘16 at 21:12</p>
+</li>
+</ul>
+<p><a href="#" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."></a> | <a href="#" title="expand to show all comments on this post">show <strong>6</strong> more comments</a></p>
+<p>11</p>
+<p><a href="/posts/41174402/timeline" title="Show activity on this post."></a></p>
+<p>Using latest versions (at least API 25) you can start the default Activity, without knowing its name, and not using <code>monkey</code>:</p>
+<pre><code>PKG=com.android.calculator2
+adb shell am start $PKG/$(adb shell cmd package resolve-activity -c android.intent.category.LAUNCHER $PKG | sed -n &#39;/name=/s/^.*name=//p&#39;)</code></pre>
+<p><a href="/a/41174402" title="short permalink to this answer">share</a> | <a href="/posts/41174402/edit">improve this answer</a> | follow |</p>
+<p>answered Dec 15 ‘16 at 22:31</p>
+<p>[</p>
+<p><img src="https://i.stack.imgur.com/IoAkG.jpg?s=32&g=1"></p>
+<p>](/users/236465/diego-torres-milano)</p>
+<p><a href="/users/236465/diego-torres-milano">Diego Torres Milano</a>Diego Torres Milano</p>
+<p>56.2k77 gold badges9797 silver badges119119 bronze badges</p>
+<ul>
+<li><p>  I don’t like nitpicking much but it is not <em>starting the default Activity, without knowing its name</em> - it’s just <em>finding the default Activity first, then using it</em>. Also there is no need to run <code>cmd package</code> in a separate <code>adb shell</code> session - it could be run in the same shell as <code>am start</code>. As a bonus the command will be more OS agnostic (currently it requires some unix shell to process the substitution). Finally, <code>cmd package resolve-activity</code> command has a <code>--brief</code> parameter which would print the full name of the default activity (as the last line) even without specifying the category. – <a href="/users/1778421/alex-p" title="25,891 reputation">Alex P.</a> Dec 24 ‘16 at 21:32</p>
+</li>
+<li><p>8</p>
+<p>  <code>adb shell &#39;am start $(cmd package resolve-activity --brief com.google.android.calculator | tail -n 1)&#39;</code> - for Windows replace <code>&#39;</code> with <code>&quot;</code> – <a href="/users/1778421/alex-p" title="25,891 reputation">Alex P.</a> Dec 24 ‘16 at 21:38</p>
+</li>
+</ul>
+<p><a href="#" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a> | <a href="#" title="expand to show all comments on this post"></a></p>
+<p>0</p>
+<p><a href="/posts/44468073/timeline" title="Show activity on this post."></a></p>
+<p>If you have the apk file, you can install and start the app using <a href="https://github.com/honeynet/droidbot">droidbot</a>.</p>
+<pre><code>&gt; droidbot -d emulator-5554 -a &lt;xxx.apk&gt; -install_app -policy none -count 0</code></pre>
+<p>DroidBot is based on adb, but it uses static analysis to extract the Activity name automatically.</p>
+<p><a href="/a/44468073" title="short permalink to this answer">share</a> | <a href="/posts/44468073/edit">improve this answer</a> | follow |</p>
+<p>answered Jun 9 ‘17 at 23:47</p>
+<p>[</p>
+<p><img src="https://www.gravatar.com/avatar/df5bc1d7e374ed706588f14fd9bbfa6c?s=32&d=identicon&r=PG&f=1"></p>
+<p>](/users/8107593/yuanchun-li)</p>
+<p><a href="/users/8107593/yuanchun-li">Yuanchun Li</a>Yuanchun Li</p>
+<p>2622 bronze badges</p>
+<p><a href="#" title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a> | <a href="#" title="expand to show all comments on this post"></a></p>
+<h2 id="Not-the-answer-you’re-looking-for-Browse-other-questions-tagged-android-android-intent-adb-or-ask-your-own-question"><a href="#Not-the-answer-you’re-looking-for-Browse-other-questions-tagged-android-android-intent-adb-or-ask-your-own-question" class="headerlink" title="Not the answer you’re looking for? Browse other questions tagged android android-intent adb or ask your own question."></a>Not the answer you’re looking for? Browse other questions tagged <a href="/questions/tagged/android" title="show questions tagged &#39;android&#39;">android</a> <a href="/questions/tagged/android-intent" title="show questions tagged &#39;android-intent&#39;">android-intent</a> <a href="/questions/tagged/adb" title="show questions tagged &#39;adb&#39;">adb</a> or <a href="/questions/ask">ask your own question</a>.</h2>]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>AndroidAdb</tag>
+      </tags>
+  </entry>
 </search>
